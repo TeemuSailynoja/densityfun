@@ -1,0 +1,11 @@
+Package: densityfun
+Type: Package
+Title: Helpful functions for working with kernel density estimates
+Version: 0.1.0
+Author: Teemu Säilynoja
+Maintainer: Teemu Säilynoja <teemu.sailynoja@gmail.com>
+Description: Functions returning functions which allow evaluating the pdf, or cdf of a KDE of interest.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.2
