@@ -133,34 +133,34 @@ kdefun <- function(x,
   function(y) {
     switch(fun.type,
            pdf = sapply(y, function(y_i) {
-             (1 / nx) * sum(switch(
+             sum(switch(
                kernel,
-               gaussian = stats::dnorm(y_i - x, sd = bw),
-               rectangular = {
+               gaussian = weights * stats::dnorm(y_i - x, sd = bw),
+               rectangular = weights * {
                  a <- bw * sqrt(3)
                  ifelse(abs(y_i - x) < a, 0.5 / a, 0)
                },
-               triangular = {
+               triangular = weights * {
                  a <- bw * sqrt(6)
                  ax <- abs(y_i - x)
                  ifelse(ax < a, (1 - ax / a) / a, 0)
                },
-               epanechnikov = {
+               epanechnikov = weights * {
                  a <- bw * sqrt(5)
                  ax <- abs(y_i - x)
                  ifelse(ax < a, 3 / 4 * (1 - (ax / a) ^ 2) / a, 0)
                },
-               biweight = {
+               biweight = weights * {
                  a <- bw * sqrt(7)
                  ax <- abs(y_i - x)
                  ifelse(ax < a, 15 / 16 * (1 - (ax / a) ^ 2) ^ 2 / a, 0)
                },
-               cosine = {
+               cosine = weights * {
                  a <- bw / sqrt(1 / 3 - 2 / pi ^ 2)
                  ifelse(abs(y_i - x) < a, (1 + cos(pi * y_i - x / a)) /
                           (2 * a), 0)
                },
-               optcosine = {
+               optcosine = weights * {
                  a <- bw / sqrt(1 - 8 / pi ^ 2)
                  ifelse(abs(y_i - x) < a,
                         pi / 4 * cos(pi * y_i - x / (2 * a)) / a,
@@ -169,7 +169,7 @@ kdefun <- function(x,
              ))
            }),
            cdf =  sapply(y, function(y_i) {
-             (1 / nx) * sum(switch(kernel, gaussian = stats::pnorm(y_i - x, sd = bw)))
+             sum(switch(kernel, gaussian = weights * stats::pnorm(y_i - x, sd = bw)))
            }))
   }
 }

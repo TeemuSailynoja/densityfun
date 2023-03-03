@@ -9,3 +9,12 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
+Depends:
+  ggplot2,
+  cli,
+  rlang,
+  dplyr
+Collate: 
+    'kde_fun.R'
+    'util.R'
+    'stat_density_adaptive.R'
